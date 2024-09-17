@@ -4,7 +4,7 @@ import io from 'socket.io-client';
 import Grid from './components/grid';
 import Dice from './components/dice';
 
-const socket = io.connect('http://localhost:3001')
+const socket = io.connect('https://snakes-and-ladders-63f6.onrender.com')
 
 function App() {
   const [username, setUsername] = useState('');
