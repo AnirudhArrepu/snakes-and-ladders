@@ -10,7 +10,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
     cors: { 
-        origin: "https://snakes-and-ladders-black.vercel.app/", 
+        origin: "http://localhost:3000", 
         methods: ["GET", "POST"]
     },
 });
@@ -18,22 +18,52 @@ const io = new Server(server, {
 let rooms = {};
 let toPlayIndex = 0;
 
+// const ladders = {
+//     4:56,
+//     12:50,
+//     14:55,
+//     22:58,
+//     41:79,
+//     54:88
+// };
+
+// const snakes = {
+//     28:10,
+//     37:3,
+//     48:16,
+//     75:32,
+//     96:42,
+//     94:71
+// };
+
 const ladders = {
-    4:56,
-    12:50,
-    14:55,
-    22:58,
-    41:79,
-    54:88
+    3:27,
+    10:12,
+    22:24,
+    36:60,
+    40:64,
+    49:93,
+    55:77,
+    66:88,
+    87:107,
+    74:96,
+    104:128,
+    100:124
 };
 
 const snakes = {
-    28:10,
-    37:3,
-    48:16,
-    75:32,
-    96:42,
-    94:71
+    17:8,
+    41:21,
+    38:31,
+    34:14,
+    45:42,
+    70:50,
+    79:51,
+    92:68,
+    96:72,
+    102:78,
+    111:91,
+    130:33
 };
 
 io.on("connection", (socket)=>{
@@ -42,13 +72,13 @@ io.on("connection", (socket)=>{
     socket.on("join_room", ({room, player})=>{
         // console.log('joined');
         // console.log(player)
-        player = {...player, socketId: socket.id};
-        socket.join(room);
-        console.log(`User with id: ${socket.id} joined room: ${room}`)
-        console.log(player);
         if(!rooms[room]){
             rooms[room] = [];
         }
+        player = {...player, socketId: socket.id, index: rooms[room].length};
+        socket.join(room);
+        console.log(`User with id: ${socket.id} joined room: ${room}`)
+        console.log(player);
         rooms[room].push(player);
 
         io.to(room).emit('players_update', rooms[room]);
@@ -74,9 +104,9 @@ io.on("connection", (socket)=>{
             newPos = ladders[newPos];
         }
     
-        if (newPos > 100) return;
+        if (newPos > 132) return;
 
-        if (newPos === 100) {
+        if (newPos === 132) {
             toPlayPlayer.position = newPos;
             toPlayIndex = (toPlayIndex + 1) % rooms[room].length;
             io.to(room).emit('players_update', rooms[room]);
