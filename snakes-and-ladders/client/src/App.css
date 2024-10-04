@@ -1,0 +1,96 @@
+*{
+  background-color: #282c34;
+}
+
+body{
+  color:#fdeaff;
+  font-size: 1.4rem;
+  font-weight:bolder;
+}
+
+input{
+  margin: 2rem;
+  padding: 1.1rem;
+  color: aliceblue;
+  border-radius: 1rem;
+  font-size: 1.2rem;
+}
+.colorbutton{
+  padding: 0.2rem;
+}ed
+
+.joinbutton{
+  padding: 1rem;
+  border-radius: 1rem;
+  font-size: 1.4rem;
+}
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.content{
+  /* padding: 1rem; */
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+ .right{
+  /* width: 50%; */
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 5rem;
+}
+
+.showdice {
+  padding: 10% 5%;
+}
+
+img{
+  border-radius: 1rem;
+  box-shadow: 0.3rem 0.3rem rgba(0, 0, 0, 0.296);
+}
+
+/* button{
+  background-color: rgba(96, 93, 93, 0.805);
+  border-radius: 1rem;
+} */
