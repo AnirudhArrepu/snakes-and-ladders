@@ -1,5 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Telugu:wght@400;700&display=swap');
 *{
   background-color: #282c34;
+}
+
+.telugu-text {
+  font-family: 'Noto Sans Telugu', sans-serif;
+  font-size: 0.8rem;
+  max-width: 40;
+  text-wrap: wrap;
+  color:red;
 }
 
 body{
