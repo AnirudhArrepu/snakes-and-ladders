@@ -1,7 +1,7 @@
 .grid {
-    width: 500px;
-    height: 525px;
-    background-image: url('board.jpg');
+    width: 800px;
+    height: 840px;
+    background-image: url('plainBoard.png');
     background-size: cover;
     border-radius: 0.5rem;
     display: grid;
@@ -17,6 +17,16 @@
     border-radius: 2rem;
     opacity: 0.8;
     transition: background-color 0.5s ease, transform 0.5s ease;
+}
+
+.pos{
+    background-color: transparent;
+    font-size: 1.2rem;
+    color: black;
+}
+
+.about-pos{
+    background-color: transparent;
 }
 
 .player {
