@@ -101,13 +101,13 @@ function Square({ number, players, cellData }) {
         squareDesc[index + 1] = cell;
     });
 
+
     const playersOnSquare = players ? players.filter(player => player.position === number) : [];
 
     let backgroundImage = null;
     try {
         backgroundImage = require(`./cells/${number}.png`);
     } catch (error) {
-        console.warn(`Image for square ${number} not found`);
     }
 
     return (

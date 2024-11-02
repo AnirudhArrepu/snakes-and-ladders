@@ -20,7 +20,7 @@ function App() {
   const [snakesData, setSnakesData] = useState([[]]);
   const [laddersData, setLaddersData] = useState([[]]);
   const [cellData, setCellData] = useState([[]]);
-  const [chosenLanguage, setChosenLanguage] = useState(0);
+  const [chosenLanguage, setChosenLanguage] = useState(1);
   
   useEffect(() => {
     //loading snakes.csv
@@ -117,9 +117,13 @@ function App() {
           <input type='text' placeholder='Name' onChange={(event)=>{setUsername(event.target.value)}}/>
           <input type='text' placeholder='Room'onChange={(event)=>{setRoom(event.target.value)}}/>
           <input type='color' className= "colorbutton" placeholder='Choose color' onChange={(event)=>{setColor(event.target.value)}}/>
-          <select name="Choose language" onChange={(e) => setChosenLanguage(e.target.value)}>
-            <option value="0">Telugu</option>
+          <select name="Choose language" onChange={(e) => {
+              const selectedValue = parseInt(e.target.value, 10);
+              console.log(selectedValue);
+              setChosenLanguage(selectedValue);
+            }}>
             <option value="1">Malayalam</option>
+            <option value="0">Telugu</option>
             <option value="2">Tamil</option>
             <option value="3">Hindi</option>
           </select>
@@ -130,7 +134,7 @@ function App() {
           <div className='content'>
 
             <div className='content left'>
-              <Grid players={players} snakes={snakesData} ladders={laddersData} cellData={cellData[chosenLanguage]}/>
+              <Grid players={players} snakes={snakesData} ladders={laddersData} cellData={cellData[chosenLanguage+1]}/>
             </div>
 
             <div className='content right'>
