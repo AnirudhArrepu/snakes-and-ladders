@@ -9,6 +9,15 @@
     grid-template-rows: repeat(12, 1fr);
 }
 
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 10;
+    background-color: transparent;
+}
+
 .square {
     position: relative;
     background-color: transparent;
@@ -17,6 +26,38 @@
     border-radius: 2rem;
     opacity: 0.8;
     transition: background-color 0.5s ease, transform 0.5s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.hover-banner {
+    display: none;
+    position: absolute;
+    bottom: -0.2rem;
+    left: 50%;
+    transform: translateX(0%) translateY(70%);
+    background-color: rgba(8, 2, 2, 0.911);
+    color: white;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    white-space: nowrap;
+    font-size: 1.4rem;
+    z-index: 100;
+    max-width: 20rem;
+    height: auto;
+    text-wrap: wrap;
+    border-radius: 1.1rem;
+}
+
+.square:hover{
+    background-color: bisque;
+}
+
+.square:hover .hover-banner {
+    display: block;
+    z-index: 100;
 }
 
 .pos{
