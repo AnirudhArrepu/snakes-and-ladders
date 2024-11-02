@@ -101,32 +101,6 @@ function Square({ number, players, cellData }) {
         squareDesc[index + 1] = cell;
     });
 
-    const squareDesc2 = {
-        3: "కర్ణుడు",
-        8: "అహంకారం",
-        10: "వికర్ణ",
-        22: "అర్జునా",
-        21: "అసూయ",
-        14: "కోపం",
-        33: "అమానవీయ",
-        31: "మోసం",
-        42: "దయలేని",
-        40: "ఏక్లవ్య",
-        36: "విధురర్",
-        55: "భీమా",
-        51: "గర్వము",
-        50: "అజ్ఞానం",
-        49: "భీష్మ",
-        66: "ద్రౌపది",
-        68: "సోమరితనం",
-        72: "నిజాయితీ",
-        74: "గంగా",
-        78: "దురాశ",
-        87: "అంబికా",
-        100: "గాంధారి",
-        111: "అహం",
-    }
-
     const playersOnSquare = players ? players.filter(player => player.position === number) : [];
 
     let backgroundImage = null;

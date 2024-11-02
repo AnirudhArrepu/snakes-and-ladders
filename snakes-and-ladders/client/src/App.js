@@ -130,7 +130,7 @@ function App() {
           <div className='content'>
 
             <div className='content left'>
-              <Grid players={players} snakes={snakesData} ladders={laddersData} cellData={cellData[chosenLanguage+1]}/>
+              <Grid players={players} snakes={snakesData} ladders={laddersData} cellData={cellData[chosenLanguage]}/>
             </div>
 
             <div className='content right'>
