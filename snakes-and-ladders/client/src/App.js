@@ -20,7 +20,6 @@ function App() {
   const [snakesData, setSnakesData] = useState([[]]);
   const [laddersData, setLaddersData] = useState([[]]);
   const [cellData, setCellData] = useState([[]]);
-  //
   const [chosenLanguage, setChosenLanguage] = useState(1);
   
   useEffect(() => {
