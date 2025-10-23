@@ -94,6 +94,7 @@ initializeGameData().then(() => {
       if (newPos === 132) {
         toPlayPlayer.position = newPos;
         toPlayIndex = (toPlayIndex + 1) % rooms[room].length;
+        io.to(room).emit("new_change_idx", newPos);
         io.to(room).emit("players_update", rooms[room]);
         io.to(room).emit("update_turn_index", toPlayIndex);
         io.to(room).emit("game_winner", toPlayPlayer.name);
@@ -103,6 +104,7 @@ initializeGameData().then(() => {
       toPlayPlayer.position = newPos;
       toPlayIndex = (toPlayIndex + 1) % rooms[room].length;
 
+      io.to(room).emit("new_change_idx", newPos);
       io.to(room).emit("players_update", rooms[room]);
       io.to(room).emit("update_turn_index", toPlayIndex);
     });
