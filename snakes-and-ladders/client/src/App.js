@@ -6,7 +6,7 @@ import Dice from './components/dice';
 import Papa from 'papaparse';
 import ShowGIF from './components/showGIF';
 
-const socket = io.connect('http://localhost:3001')
+const socket = io();
 
 function App() {
   const [username, setUsername] = useState('');
@@ -21,6 +21,9 @@ function App() {
   const [laddersData, setLaddersData] = useState([[]]);
   const [cellData, setCellData] = useState([[]]);
   const [chosenLanguage, setChosenLanguage] = useState(1);
+  const [modalPos, setModalPos] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+
   
   useEffect(() => {
     //loading snakes.csv
@@ -73,7 +76,13 @@ function App() {
     console.log(cellData);
     
 
+    socket.on("new_change_idx", (newPos) => {
+      setModalPos(newPos);
+      setShowModal(true);
 
+      // hide after 2 seconds
+      setTimeout(() => setShowModal(false), 2000);
+    });
 
     socket.on('players_update', (playersData) => {
         setPlayers(playersData);
@@ -93,6 +102,7 @@ function App() {
       socket.off('players_update');
       socket.off('update_turn_index');
       socket.off('game_winner');
+      socket.off("new_change_idx");
     };
 }, [players, turnIndex, winner]);
   
@@ -112,42 +122,87 @@ function App() {
   return (
     <div className="App">
       {!showGame ? (
-        <div className='joiningdiv'>
+        <div className="joiningdiv">
           <h3>Join game</h3>
-          <input type='text' placeholder='Name' onChange={(event)=>{setUsername(event.target.value)}}/>
-          <input type='text' placeholder='Room'onChange={(event)=>{setRoom(event.target.value)}}/>
-          <input type='color' className= "colorbutton" placeholder='Choose color' onChange={(event)=>{setColor(event.target.value)}}/>
-          <select name="Choose language" onChange={(e) => {
+          <input
+            type="text"
+            placeholder="Name"
+            onChange={(event) => {
+              setUsername(event.target.value);
+            }}
+          />
+          <input
+            type="text"
+            placeholder="Room"
+            onChange={(event) => {
+              setRoom(event.target.value);
+            }}
+          />
+          <input
+            type="color"
+            className="colorbutton"
+            placeholder="Choose color"
+            onChange={(event) => {
+              setColor(event.target.value);
+            }}
+          />
+          <select
+            name="Choose language"
+            onChange={(e) => {
               const selectedValue = parseInt(e.target.value, 10);
               console.log(selectedValue);
               setChosenLanguage(selectedValue);
-            }}>
+            }}
+          >
             <option value="1">Malayalam</option>
             <option value="0">Telugu</option>
             <option value="2">Tamil</option>
             <option value="3">Hindi</option>
           </select>
-          <button className="joinbutton" onClick={joinRoom}>Join</button>
-
-        </div>)
-        : (
-          <div className='content'>
-
-            <div className='content left'>
-              <Grid players={players} snakes={snakesData} ladders={laddersData} cellData={cellData[chosenLanguage+1]}/>
-            </div>
-
-            <div className='content right'>
-              <div className='showgif'>
-                {/* <ShowGIF players={players} username={username} gifs={gifs}/> */}
-              </div>
-              <div className='showdice'>
-                <Dice players={players} turnIndex={turnIndex} socket={socket} winner={winner} room={room}/>
-              </div>
-            </div>
-
+          <button className="joinbutton" onClick={joinRoom}>
+            Join
+          </button>
+        </div>
+      ) : (
+        <div className="content">
+          <div className="content left">
+            <Grid
+              players={players}
+              snakes={snakesData}
+              ladders={laddersData}
+              cellData={cellData[chosenLanguage + 1]}
+            />
           </div>
-        )}
+
+          <div className="content right">
+            <div className="showgif">
+              {/* <ShowGIF players={players} username={username} gifs={gifs}/> */}
+            </div>
+            <div className="showdice">
+              <Dice
+                players={players}
+                turnIndex={turnIndex}
+                socket={socket}
+                winner={winner}
+                room={room}
+              />
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showModal && modalPos && (
+        <div className="cell-modal">
+          <div className="cell-modal-content">
+            <img
+              src={require(`./components/cells/${modalPos}.png`)}
+              alt={`Cell ${modalPos}`}
+              className="cell-modal-img"
+            />
+            <p className="cell-modal-text">Position: {modalPos}</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
