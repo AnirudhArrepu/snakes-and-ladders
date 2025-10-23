@@ -1,11 +1,127 @@
-.line{
-    padding: 2px 0;
+/* container */
+.diceBody {
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-top: 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+/* small layout helpers */
+.line {
+    margin: 6px 0;
+}
+
+/* dice cube (2D grid) */
+.dice {
+    width: 84px;
+    height: 84px;
+    background: linear-gradient(180deg, #ffffff, #f0f0f0);
+    border-radius: 12px;
+    border: 2px solid #333;
+    box-shadow: 3px 4px 10px rgba(0, 0, 0, 0.18);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    padding: 10px;
+    gap: 6px;
+    transform-origin: center center;
+    transition: transform 180ms ease;
+}
+
+/* per-cell */
+.cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* dot */
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #ffffff;
+    opacity: 0;
+    transform: scale(0.4);
+    transition: opacity 140ms ease, transform 140ms ease;
+    will-change: transform, opacity;
+}
+
+/* visible dot */
+.dot.visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* rolling animation for the whole dice */
+.dice.rolling {
+    animation: rollAnim 900ms cubic-bezier(.2, .8, .2, 1);
+    box-shadow: 6px 8px 18px rgba(0, 0, 0, 0.22);
+}
+
+/* subtle keyframes to make the cube feel like it's wobbling/spinning */
+@keyframes rollAnim {
+    0% {
+        transform: rotateX(0deg) rotateY(0deg) scale(1);
+    }
+
+    25% {
+        transform: rotateX(25deg) rotateY(10deg) scale(1.03);
+    }
+
+    50% {
+        transform: rotateX(-10deg) rotateY(40deg) scale(0.98);
+    }
+
+    75% {
+        transform: rotateX(10deg) rotateY(-30deg) scale(1.01);
+    }
+
+    100% {
+        transform: rotateX(0deg) rotateY(0deg) scale(1);
+    }
+}
+
+/* Roll button and controls */
+.controls {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    justify-content: center;
 }
 
 .roll {
-    margin-top: 10px;
-    padding: 12px 36px;
-    /* box-shadow: 2px 2px rgba(0, 0, 0, 0.065); */
-    border-radius: 1rem;
-    background-color: rgb(153, 255, 0);
+    background-color: #1976d2;
+    color: white;
+    padding: 8px 18px;
+    font-size: 15px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 120ms ease, background-color 120ms;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+}
+
+.roll:hover:not(:disabled) {
+    transform: translateY(-2px);
+}
+
+.roll:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.roll.disabled {
+    background: #999;
+}
+
+/* last number text */
+.finalNumber {
+    font-size: 14px;
+    color: #ffffff;
+    padding-left: 6px;
 }
